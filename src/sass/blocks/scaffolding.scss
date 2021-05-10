@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Roboto.woff2"),
+    url("../../fonts/Roboto.woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Robotomedium.woff2"),
+    url("../../fonts/Robotomedium.woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Robotobold.woff2"),
+    url("../../fonts/Robotobold.woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+$desktop-width: 1024px;
+$tablet-width: 768px;
+$mobile-width: 320px;
+
+body {
+  margin: 0 auto;
+  font-family: "Roboto", "Arial", sans-serif;
+  color: #1F1E25;
+  background-color: #fff;
+
+  @media (max-width: $tablet-width - 1) {
+    min-width: 320px;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    padding: 0 45px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    padding: 0 15px;
+  }
+}

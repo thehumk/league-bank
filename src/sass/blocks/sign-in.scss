@@ -1,0 +1,177 @@
+.sign-in {
+  position: fixed;
+  display: none;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: baseline;
+  width: 544px;
+  min-height: 493px;
+  padding: 56px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #F6F7FF;
+  border: 4px solid #2C36F2;
+  box-sizing: border-box;
+  z-index: 99;
+
+  &--opened {
+    display: flex;
+  }
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    width: 678px;
+    padding: 56px 84px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    width: 290px;
+    min-height: 455px;
+    padding: 45px 16px 71px 16px;
+  }
+}
+
+.sign-in__logo {
+  margin-bottom: 34px;
+
+  @media (max-width: $tablet-width - 1) {
+    margin-left: -6px;
+    margin-bottom: 25px;
+  }
+}
+
+.sign-in__close-btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 53px;
+  right: 54px;
+  background-color: transparent;
+  background-image: url("../../img/close-icon.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    top: 55px;
+    right: 81px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    width: 16px;
+    height: 16px;
+    top: 43px;
+    right: 14px;
+  }
+}
+
+.sign-in__label {
+  position: relative;
+  margin-top: 1px;
+  margin-bottom: 25px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #394959;
+
+  @media (max-width: $tablet-width - 1) {
+    &--login {
+      margin-bottom: 19px;
+    }
+
+    &--password {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.sign-in__input {
+  width: 424px;
+  height: 60px;
+  margin-top: 4px;
+  padding-left: 10px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 24px;
+  line-height: 58px;
+  background-color: #F6F7FF;
+  border: 1px solid #1F1E25;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  &--password {
+    padding-right: 60px;
+  }
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    width: 502px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    width: 250px;
+
+    &--password {
+      padding-right: 50px;
+    }
+  }
+}
+
+.sign-in__show-password {
+  position: absolute;
+  width: 22px;
+  height: 12px;
+  top: 51px;
+  right: 24px;
+  background-image: url("../../img/show-password-icon.svg");
+  background-repeat: no-repeat;
+
+  @media (max-width: $tablet-width - 1) {
+    right: 15px;
+  }
+}
+
+.sign-in__restore-password {
+  position: absolute;
+  right: 57px;
+  bottom: 142px;
+  font-size: 12px;
+  line-height: 17px;
+  color: #707C87;
+  text-align: right;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    right: 84px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    bottom: 41px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.sign-in__submit-btn {
+  width: 424px;
+  height: 60px;
+  margin-top: 22px;
+  font-family: "Roboto";
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #F6F7FF;
+  background-color: #2C36F2;
+  border: none;
+  border-radius: 4px;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    width: 502px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    margin-top: 0;
+    width: 250px;
+    height: 51px;
+    font-size: 14px;
+  }
+}

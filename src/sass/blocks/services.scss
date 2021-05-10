@@ -1,0 +1,108 @@
+.services {
+  position: relative;
+  max-width: 1170px;
+  margin: 0 auto;
+  margin-bottom: 96px;
+  overflow: hidden;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    margin-bottom: 68px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 53px;
+  }
+}
+
+.services__tabs-control {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (max-width: $desktop-width - 1) {
+    display: none;
+  }
+}
+
+.services__control-item {
+  flex-grow: 1;
+  width: 100%;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 93px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+
+  &--active {
+    background-color: #F6F7FF;
+  }
+}
+
+.services__control-value {
+  display: inline-block;
+  position: relative;
+  transform: translateX(22px);
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: -44px;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+  }
+
+  &--deposits::before {
+    width: 34px;
+    height: 33px;
+    background-image: url("../../img/vault-icon.svg");
+  }
+
+  &--credits::before {
+    width: 34px;
+    height: 30px;
+    background-image: url("../../img/cards-icon.svg");
+  }
+
+  &--insurance {
+    transform: translateX(20px);
+    
+    &::before {
+      width: 28px;
+      height: 34px;
+      left: -38px;
+      background-image: url("../../img/security-icon.svg");
+    }
+  }
+
+  &--online {
+    transform: translateX(15px);
+    
+    &::before {
+      width: 20px;
+      height: 34px;
+      left: -30px;
+      background-image: url("../../img/phone-icon.svg");
+    }
+  }
+}
+
+.services__tabs-container {
+  display: flex;
+  position: relative;
+
+  @media (max-width: $desktop-width - 1) {
+    cursor: grabbing;
+  }
+}
+
+.services__control-panel {
+  @media (min-width: $desktop-width) {
+    display: none;
+  }
+}

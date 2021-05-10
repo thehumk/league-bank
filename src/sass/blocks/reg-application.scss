@@ -1,0 +1,148 @@
+.reg-application {
+  width: 770px;
+  min-height: 722px;
+  padding: 63px 70px 70px 70px;
+  margin: 0 auto;
+  background-color: #F6F7FF;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  @media (max-width: $desktop-width - 1) {
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+  }
+}
+
+.reg-application__title {
+  margin: 0;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 31px;
+  text-align: center;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    margin-bottom: 26px;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 19px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.reg-application__table {
+  width: 100%;
+  margin-bottom: 30px;
+  border-collapse: collapse;
+}
+
+.reg-application__param-field {
+  line-height: 52px;
+  border-bottom: 1px solid #C4C4C4;
+
+  @media (max-width: $tablet-width - 1) {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 15px 0 13px 0;
+    line-height: normal;
+  }
+}
+
+.reg-application__field-name {
+  font-size: 16px;
+  color: #394959;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    font-size: 16px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    line-height: 20px;
+  }
+}
+
+.reg-application__field-value {
+  font-size: 22px;
+  font-weight: 500;
+  text-align: right;
+
+  @media (max-width: $tablet-width - 1) {
+    font-size: 18px;
+    line-height: 23px;
+    text-align: left;
+  }
+}
+
+.reg-application__input-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 10px;
+  }
+}
+
+.reg-application__input {
+  width: 300px;
+  height: 60px;
+  padding-left: 22px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 18px;
+  line-height: 60px;
+  letter-spacing: 0.03em;
+  color: #707C87;
+  border: 1px solid #0A1E32;
+  border-radius: 4px;
+  background-color: transparent;
+  box-sizing: border-box;
+
+  &--full-name {
+    width: 630px;
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    width: 324px;
+
+    &--full-name {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    width: 100%;
+    padding-left: 14px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+}
+
+.reg-application__submit-btn {
+  display: block;
+  width: 198px;
+  height: 51px;
+  margin: 0 auto;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 51px;
+  font-weight: 500;
+  color: #F6F7FF;
+  background-color: #2C36F2;
+  border-radius: 4px;
+  border: none;
+
+  @media (max-width: $desktop-width - 1) {
+    width: 100%;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    font-size: 14px;
+  }
+}

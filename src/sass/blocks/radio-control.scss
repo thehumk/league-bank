@@ -1,0 +1,43 @@
+.radio-control {
+  display: flex;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    bottom: 15px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    bottom: 10px;
+  }
+}
+
+.radio-control__input {
+  display: none;
+}
+
+.radio-control__label {
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  background-color: #2028B6;
+  border: none;
+  border-radius: 50%;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--active {
+    background-color: #E0E0E0;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    width: 6px;
+    height: 6px;
+    margin-right: 6px;
+  }
+}
