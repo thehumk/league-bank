@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {divideNumberToSpace} from '../../utils';
 
 const Offer = ({state}) => {
@@ -38,6 +39,25 @@ const Offer = ({state}) => {
       )}
     </>
   );
+}
+
+Offer.propTypes = {
+  state: PropTypes.shape({
+    step: PropTypes.number.isRequired,
+    purpose: PropTypes.string.isRequired,
+    isPurposeSelectOpened: PropTypes.bool.isRequired,
+    paramsCredit: PropTypes.object.isRequired,
+    cost: PropTypes.number.isRequired,
+    initialFee: PropTypes.number.isRequired,
+    term: PropTypes.number.isRequired,
+    maternalCapital: PropTypes.bool.isRequired,
+    casco: PropTypes.bool.isRequired,
+    lifeInsurance: PropTypes.bool.isRequired,
+    creditAmount: PropTypes.number.isRequired,
+    percent: PropTypes.number.isRequired,
+    monthlyPayment: PropTypes.number.isRequired,
+    requiredIncome: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export default Offer;

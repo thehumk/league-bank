@@ -1,0 +1,42 @@
+.map {
+  max-width: 1170px;
+  padding: 0 20px;
+  margin: 0 auto 107px auto;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    padding: 0 45px;
+    margin-bottom: 76px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    padding: 0;
+    margin-bottom: 56px;
+  }
+}
+
+.map__title {
+  margin: 0;
+  margin-bottom: 55px;
+  font-size: 41px;
+  line-height: 57px;
+
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    margin-bottom: 33px;
+    font-size: 32px;
+    line-height: 45px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 27px;
+    margin-left: 15px;
+    font-size: 22px;
+    line-height: 31px;
+  }
+}
+
+.map__iframe {
+  @media (max-width: $tablet-width - 1) {
+    height: 381px;
+  }
+}

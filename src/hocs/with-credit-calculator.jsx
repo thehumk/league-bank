@@ -1,5 +1,5 @@
 import React from 'react';
-import {MortgageParams, CarParams} from '../const';
+import {MortgageParams, CarParams, KeyCode, REQUIRED_INCOME, QUANTITY_MONTH} from '../const';
 
 const withCreditCalculator = (Component) => {
   class WithCreditCalculator extends React.PureComponent {
@@ -7,14 +7,14 @@ const withCreditCalculator = (Component) => {
       super(props);
 
       this.state = {
-        step: 2,
-        purpose: `mortgage`,
+        step: 1,
+        purpose: `none`,
         isPurposeSelectOpened: false,
-        paramsCredit: MortgageParams,
+        paramsCredit: ``,
         
-        cost: MortgageParams.minCost,
-        initialFee: MortgageParams.minCost * MortgageParams.minInitialFee / 100,
-        term: MortgageParams.minTerm,
+        cost: 0,
+        initialFee: 0,
+        term: 0,
 
         maternalCapital: false,
         casco: false,
@@ -44,6 +44,11 @@ const withCreditCalculator = (Component) => {
       this.getMonthlyPayment = this.getMonthlyPayment.bind(this);
 
       this.onMakeRequest = this.onMakeRequest.bind(this);
+      this.onRegApplicationChange = this.onRegApplicationChange.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.onPopupClose = this.onPopupClose.bind(this);
+      this.closePopupKeydown = this.closePopupKeydown.bind(this);
+      this.onChangePhone = this.onChangePhone.bind(this);
     }
 
     componentDidMount() {
@@ -117,8 +122,12 @@ const withCreditCalculator = (Component) => {
     onInitialFeeChange(evt) {
       let {name, value} = evt.target;
 
-      if (value < this.state.cost * this.state.paramsCredit.minInitialFee / 100) value = this.state.cost * this.state.paramsCredit.minInitialFee / 100;
-      if (value > this.state.cost) value = this.state.cost;
+      if (value < this.state.cost * this.state.paramsCredit.minInitialFee / 100) {
+        value = this.state.cost * this.state.paramsCredit.minInitialFee / 100;
+      }
+      if (value > this.state.cost) {
+        value = this.state.cost;
+      }
 
       this.onInputBlur(evt, name, value);
     }
@@ -126,8 +135,12 @@ const withCreditCalculator = (Component) => {
     onTermChange(evt) {
       let {name, value} = evt.target;
 
-      if (value < this.state.paramsCredit.minTerm) value = this.state.paramsCredit.minTerm;
-      if (value > this.state.paramsCredit.maxTerm) value = this.state.paramsCredit.maxTerm;
+      if (value < this.state.paramsCredit.minTerm) {
+        value = this.state.paramsCredit.minTerm;
+      }
+      if (value > this.state.paramsCredit.maxTerm) {
+        value = this.state.paramsCredit.maxTerm;
+      }
 
       this.onInputBlur(evt, name, value);
     }
@@ -150,8 +163,12 @@ const withCreditCalculator = (Component) => {
       let cost = this.state.cost;
 
       evt.target.id === `plus` ? cost += this.state.paramsCredit.step : cost -= this.state.paramsCredit.step;
-      if (cost < this.state.paramsCredit.minCost) cost = this.state.paramsCredit.minCost;
-      if (cost > this.state.paramsCredit.maxCost) cost = this.state.paramsCredit.maxCost;
+      if (cost < this.state.paramsCredit.minCost) {
+        cost = this.state.paramsCredit.minCost;
+      }
+      if (cost > this.state.paramsCredit.maxCost) {
+        cost = this.state.paramsCredit.maxCost;
+      }
 
       this.setState({
         cost: cost,
@@ -191,13 +208,13 @@ const withCreditCalculator = (Component) => {
     }
 
     getMonthlyPayment() {
-      const monthlyPercent = (this.state.percent / 100) / 12;
+      const monthlyPercent = (this.state.percent / 100) / QUANTITY_MONTH;
 
-      const result = Math.floor(this.state.creditAmount * monthlyPercent / (1 - (1 / (1 + monthlyPercent)**(this.state.term * 12))));
+      const result = Math.floor(this.state.creditAmount * monthlyPercent / (1 - (1 / (1 + monthlyPercent)**(this.state.term * QUANTITY_MONTH))));
 
       this.setState({
         monthlyPayment: result,
-        requiredIncome: Math.floor(result * 100 / 45),
+        requiredIncome: Math.floor(result * 100 / REQUIRED_INCOME),
       });
     }
 
@@ -205,6 +222,45 @@ const withCreditCalculator = (Component) => {
       evt.preventDefault();
 
       this.setState({step: 3});
+    }
+
+    onRegApplicationChange(evt) {
+      const {name, value} = evt.target;
+
+      this.setState({name: value});
+      localStorage.setItem(name, value);
+    }
+
+    onSubmit(evt) {
+      evt.preventDefault();
+
+      this.setState({step: 4});
+      document.documentElement.style.overflow = `hidden`;
+      document.addEventListener(`keydown`, this.closePopupKeydown);
+    }
+
+    onPopupClose() {
+      this.setState({
+        step: 1,
+        purpose: `none`,
+      });
+
+      document.documentElement.style.overflow = `auto`;
+      document.removeEventListener(`keydown`, this.closePopupKeydown);
+    }
+
+    closePopupKeydown(evt) {
+      if (evt.keyCode === KeyCode.ESC) {
+        this.onPopupClose();
+      }
+    }
+
+    onChangePhone(evt) {
+      const {name, value} = evt.target;
+      const result = value.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '+7 ($1) $2-$3-$4');
+
+      this.setState({name, result});
+      localStorage.setItem(name, result);
     }
 
     render() {
@@ -225,6 +281,10 @@ const withCreditCalculator = (Component) => {
           onAdditionalChange={this.onAdditionalChange}
           onCostChangeSign={this.onCostChangeSign}
           onMakeRequest={this.onMakeRequest}
+          onSubmit={this.onSubmit}
+          onPopupClose={this.onPopupClose}
+          onRegApplicationChange={this.onRegApplicationChange}
+          onChangePhone={this.onChangePhone}
         />
       );
     }

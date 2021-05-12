@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from '../img/sign-in-logo.svg';
 
 const SignIn = ({state, onSignInClosure, onSignInFieldChange}) => {
@@ -36,10 +37,23 @@ const SignIn = ({state, onSignInClosure, onSignInFieldChange}) => {
         />
         <div className="sign-in__show-password"></div>
       </label>
-      <a href="#" className="sign-in__restore-password">Забыли пароль?</a>
+      <a href="#top" className="sign-in__restore-password">Забыли пароль?</a>
       <button type="submit" className="sign-in__submit-btn">Войти</button>
     </form>
   );
+}
+
+SignIn.propTypes = {
+  state: PropTypes.shape({
+    menuOpened: PropTypes.bool.isRequired,
+    signInOpened: PropTypes.bool.isRequired,
+    signInValue: PropTypes.shape({
+      [`sign-in-login`]: PropTypes.string.isRequired,
+      [`sign-in-password`]: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  onSignInClosure: PropTypes.func.isRequired,
+  onSignInFieldChange: PropTypes.func.isRequired,
 }
 
 export default SignIn;

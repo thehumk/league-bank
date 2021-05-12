@@ -1,4 +1,5 @@
 import React from 'react';
+import {DESKTOP_WIDTH, QuantitySlides} from '../const';
 
 const withServices = (Component) => {
   class WithServices extends React.PureComponent {
@@ -27,7 +28,7 @@ const withServices = (Component) => {
     }
 
     onSwipeStart(evt) {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= DESKTOP_WIDTH) {
         return;
       }
 
@@ -57,8 +58,8 @@ const withServices = (Component) => {
         this.leftCoord = 0;
       }
 
-      if (this.leftCoord < this.width * -3) {
-        this.leftCoord = this.width * -3;
+      if (this.leftCoord < this.width * -(QuantitySlides.SERVICES - 1)) {
+        this.leftCoord = this.width * -(QuantitySlides.SERVICES - 1);
       }
 
       this.slider.style.left = this.leftCoord + `px`;
@@ -76,7 +77,7 @@ const withServices = (Component) => {
 
       if (this.posX * -1 / this.width > 0.5) {
         this.setState({
-          activeSlide: this.state.activeSlide === 4 ? 4 : this.state.activeSlide + 1
+          activeSlide: this.state.activeSlide === QuantitySlides.SERVICES ? QuantitySlides.SERVICES : this.state.activeSlide + 1
         })
       } else if (this.posX * -1 / this.width < -0.5) {
         this.setState({

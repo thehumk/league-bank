@@ -1,0 +1,24 @@
+.footer-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-nav__item {
+  margin-bottom: 11px;
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 8px;
+  }
+}
+
+.footer-nav__link {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #1F1E25;
+
+  @media (max-width: $tablet-width - 1) {
+    font-size: 14px;
+  }
+}

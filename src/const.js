@@ -36,3 +36,17 @@ export const CarParams = {
     allAdditions: 3.5,
   },
 };
+
+export const KeyCode = {
+  ESC: 27,
+};
+
+export const QuantitySlides = {
+  MAIN: 3,
+  SERVICES: 4,
+};
+
+export const REQUIRED_INCOME = 45;
+export const QUANTITY_MONTH = 12;
+
+export const DESKTOP_WIDTH = 1024;

@@ -1,26 +1,16 @@
 .credit-calculator {
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 0 auto 85px auto;
   padding: 0 20px;
 
   @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    margin-bottom: 40px;
     padding: 0 45px;
   }
 
   @media (max-width: $tablet-width - 1) {
+    margin-bottom: 44px;
     padding: 0 15px;
-  }
-}
-
-.credit-calculator__form {
-  margin-bottom: 68px;
-
-  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
-    margin-bottom: 55px;
-  }
-
-  @media (max-width: $tablet-width - 1) {
-    margin-bottom: 43px;
   }
 }
 
@@ -519,5 +509,17 @@
 
   @media (max-width: $tablet-width - 1) {
     font-size: 14px;
+  }
+}
+
+.credit-calculator__reg-application {
+  margin-top: 68px;
+
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+    margin-top: 55px;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    margin-top: 43px;
   }
 }

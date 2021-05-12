@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Repeat} from '../utils';
 
 const RadioControl = ({quantity, name, active}) => {
@@ -14,6 +15,12 @@ const RadioControl = ({quantity, name, active}) => {
       </Repeat>
     </div>
   );
+}
+
+RadioControl.propTypes = {
+  quantity: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  active: PropTypes.number.isRequired,
 }
 
 export default RadioControl;

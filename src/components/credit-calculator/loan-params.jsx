@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {divideNumberToSpace} from '../../utils';
 
 const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitialFeeChange, onTermChange, onInputRangeChange, onAdditionalChange, onCostChangeSign}) => {
@@ -123,6 +124,33 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
       )}
     </fieldset>
   );
+}
+
+LoanParams.propTypes = {
+  state: PropTypes.shape({
+    step: PropTypes.number.isRequired,
+    purpose: PropTypes.string.isRequired,
+    isPurposeSelectOpened: PropTypes.bool.isRequired,
+    paramsCredit: PropTypes.object.isRequired,
+    cost: PropTypes.number.isRequired,
+    initialFee: PropTypes.number.isRequired,
+    term: PropTypes.number.isRequired,
+    maternalCapital: PropTypes.bool.isRequired,
+    casco: PropTypes.bool.isRequired,
+    lifeInsurance: PropTypes.bool.isRequired,
+    creditAmount: PropTypes.number.isRequired,
+    percent: PropTypes.number.isRequired,
+    monthlyPayment: PropTypes.number.isRequired,
+    requiredIncome: PropTypes.number.isRequired,
+  }).isRequired,
+  onInputFocus: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onCostChange: PropTypes.func.isRequired,
+  onInitialFeeChange: PropTypes.func.isRequired,
+  onTermChange: PropTypes.func.isRequired,
+  onInputRangeChange: PropTypes.func.isRequired,
+  onAdditionalChange: PropTypes.func.isRequired,
+  onCostChangeSign: PropTypes.func.isRequired,
 }
 
 export default LoanParams;

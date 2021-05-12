@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoanParams from './loan-params';
 import Offer from './offer';
 import RegApplication from './reg-application';
+import PopupFeedback from './popup-feedback';
 import withCreditCalculator from '../../hocs/with-credit-calculator';
 
 const PurposeValue = {
@@ -11,11 +13,12 @@ const PurposeValue = {
 }
 
 const CreditCalculator = (props) => {
-  const {state, onSelectOpen, onSelectClose, onPurposeChange, onMakeRequest} = props;
+  const {state, onSelectOpen, onSelectClose, onPurposeChange, onMakeRequest, onRegApplicationChange, onSubmit, onPopupClose, onChangePhone} = props;
   const {step, purpose, isPurposeSelectOpened} = state;
 
   return (
     <section className="credit-calculator">
+      <a name="credit-calculator"></a>
       <form action="#" className="credit-calculator__form" onSubmit={onMakeRequest}>
         <h2 className="credit-calculator__title">Кредитный калькулятор</h2>
         <div className="credit-calculator__flex-container">
@@ -43,10 +46,45 @@ const CreditCalculator = (props) => {
         </div>
       </form>
       {step >= 3 && (
-        <RegApplication state={state}/>
+        <RegApplication
+          state={state}
+          onRegApplicationChange={onRegApplicationChange}
+          onChangePhone={onChangePhone}
+          onSubmit={onSubmit}
+        />
+      )}
+      {step >= 4 && (
+        <PopupFeedback onPopupClose={onPopupClose}/>
       )}
     </section>
   );
+}
+
+CreditCalculator.propTypes = {
+  state: PropTypes.shape({
+      step: PropTypes.number.isRequired,
+      purpose: PropTypes.string.isRequired,
+      isPurposeSelectOpened: PropTypes.bool.isRequired,
+      paramsCredit: PropTypes.object.isRequired,
+      cost: PropTypes.number.isRequired,
+      initialFee: PropTypes.number.isRequired,
+      term: PropTypes.number.isRequired,
+      maternalCapital: PropTypes.bool.isRequired,
+      casco: PropTypes.bool.isRequired,
+      lifeInsurance: PropTypes.bool.isRequired,
+      creditAmount: PropTypes.number.isRequired,
+      percent: PropTypes.number.isRequired,
+      monthlyPayment: PropTypes.number.isRequired,
+      requiredIncome: PropTypes.number.isRequired,
+  }).isRequired,
+  onSelectOpen: PropTypes.func.isRequired,
+  onSelectClose: PropTypes.func.isRequired,
+  onPurposeChange: PropTypes.func.isRequired,
+  onMakeRequest: PropTypes.func.isRequired,
+  onRegApplicationChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onPopupClose: PropTypes.func.isRequired,
+  onChangePhone: PropTypes.func.isRequired,
 }
 
 export default withCreditCalculator(CreditCalculator);

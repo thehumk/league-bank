@@ -4,6 +4,8 @@ import Header from './components/header';
 import MainSlider from './components/main-slider/main-slider';
 import Services from './components/services/services';
 import CreditCalculator from './components/credit-calculator/credit-calculator';
+import Map from './components/map';
+import Footer from './components/footer';
 
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
       <MainSlider/>
       <Services/>
       <CreditCalculator/>
+      <Map/>
+      <Footer/>
     </div>
   );
 }

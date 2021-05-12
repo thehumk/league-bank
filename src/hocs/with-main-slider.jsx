@@ -1,4 +1,5 @@
 import React from 'react';
+import {DESKTOP_WIDTH, QuantitySlides} from '../const';
 
 const withMainSlider = (Component) => {
   class WithMainSlider extends React.PureComponent {
@@ -21,12 +22,12 @@ const withMainSlider = (Component) => {
 
     onCarouselActive() {
       this.carouselInterval = setInterval(() => {
-        this.setState({activeSlide: this.state.activeSlide === 3 ? 1 : this.state.activeSlide + 1})
+        this.setState({activeSlide: this.state.activeSlide === QuantitySlides.MAIN ? 1 : this.state.activeSlide + 1})
       }, 4000);
     }
 
     onSwipeStart(evt) {
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= DESKTOP_WIDTH) {
         return;
       }
 
@@ -58,8 +59,8 @@ const withMainSlider = (Component) => {
         this.leftCoord = 0;
       }
 
-      if (this.leftCoord < this.width * -2) {
-        this.leftCoord = this.width * -2;
+      if (this.leftCoord < this.width * -(QuantitySlides.MAIN - 1)) {
+        this.leftCoord = this.width * -(QuantitySlides.MAIN - 1);
       }
 
       this.slider.style.left = this.leftCoord + `px`;
@@ -77,7 +78,7 @@ const withMainSlider = (Component) => {
 
       if (this.posX * -1 / this.width > 0.5) {
         this.setState({
-          activeSlide: this.state.activeSlide === 3 ? 3 : this.state.activeSlide + 1
+          activeSlide: this.state.activeSlide === QuantitySlides.MAIN ? QuantitySlides.MAIN : this.state.activeSlide + 1
         })
       } else if (this.posX * -1 / this.width < -0.5) {
         this.setState({
