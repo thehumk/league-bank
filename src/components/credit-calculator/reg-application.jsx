@@ -40,7 +40,6 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit,
           placeholder="ФИО"
           onChange={onRegApplicationChange}
           onInvalid={(evt) => {
-            console.log(evt.target)
             shakeEffect(evt.target);
           }}
           value={localStorage.getItem(`fullname`) !== null ? localStorage.getItem(`fullname`) : ``}
@@ -54,7 +53,6 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit,
           placeholder="Телефон"
           onChange={onChangePhone}
           onInvalid={(evt) => {
-            console.log(evt.target)
             shakeEffect(evt.target);
           }}
           value={localStorage.getItem(`tel`) !== null ? localStorage.getItem(`tel`) : ``}
@@ -67,7 +65,6 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit,
           placeholder="E-mail"
           onChange={onRegApplicationChange}
           onInvalid={(evt) => {
-            console.log(evt.target)
             shakeEffect(evt.target);
           }}
           value={localStorage.getItem(`email`) !== null ? localStorage.getItem(`email`) : ``}

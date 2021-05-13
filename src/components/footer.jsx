@@ -4,7 +4,7 @@ import logoMobile from '../img/logo-mobile.svg';
 
 const Footer = () => {
   return (
-    <footer className="page-footer">
+    <footer className="page-footer app__footer">
       <div className="page-footer__container">
         <section className="page-footer__address">
         <a href="#top">

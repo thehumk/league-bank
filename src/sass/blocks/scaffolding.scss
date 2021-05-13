@@ -73,6 +73,21 @@ input[type="radio"].visually-hidden {
   }
 }
 
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .app__header,
+  .app__footer {
+    flex: 0 0 auto;
+  }
+
+  .app__main {
+    flex: 1 0 auto;
+  }
+}
+
 @keyframes shake {
   0%,
   100% {

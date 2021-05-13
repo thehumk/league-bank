@@ -8,7 +8,7 @@ const Header = ({state, onMenuOpening, onMenuClosure, onSignInOpening, onSignInC
   const menuOpened = state.menuOpened;
 
   return (
-    <header className={`header ${menuOpened ? `header--opened` : ``}`}>
+    <header className={`header ${menuOpened ? `header--opened` : ``} app__header`}>
       <div className="container header__container">
         <div className="header__wrapper">
           <button className="header__burger-button" onClick={onMenuOpening}><span className="visually-hidden">Открыть меню</span></button>
