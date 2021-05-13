@@ -13,7 +13,7 @@ const PurposeValue = {
 }
 
 const CreditCalculator = (props) => {
-  const {state, onSelectOpen, onSelectClose, onPurposeChange, onMakeRequest, onRegApplicationChange, onSubmit, onPopupClose, onChangePhone} = props;
+  const {state, onSelectOpen, onSelectClose, onPurposeChange, onMakeRequest, onRegApplicationChange, onSubmit, onPopupClose, onChangePhone, requestNumber} = props;
   const {step, purpose, isPurposeSelectOpened} = state;
 
   return (
@@ -51,6 +51,7 @@ const CreditCalculator = (props) => {
           onRegApplicationChange={onRegApplicationChange}
           onChangePhone={onChangePhone}
           onSubmit={onSubmit}
+          requestNumber={requestNumber}
         />
       )}
       {step >= 4 && (
@@ -65,7 +66,46 @@ CreditCalculator.propTypes = {
       step: PropTypes.number.isRequired,
       purpose: PropTypes.string.isRequired,
       isPurposeSelectOpened: PropTypes.bool.isRequired,
-      paramsCredit: PropTypes.object.isRequired,
+      paramsCredit: PropTypes.oneOfType([
+        PropTypes.shape({}),
+        PropTypes.shape({
+          type: PropTypes.string.isRequired,
+          minCost: PropTypes.number.isRequired,
+          maxCost: PropTypes.number.isRequired,
+          step: PropTypes.number.isRequired,
+          minInitialFee: PropTypes.number.isRequired,
+          minTerm: PropTypes.number.isRequired,
+          maxTerm: PropTypes.number.isRequired,
+          minCreditAmount: PropTypes.number.isRequired,
+          maternalCapitalValue: PropTypes.number.isRequired,
+          percent: PropTypes.shape({
+            default: PropTypes.number.isRequired,
+            specialPercent: PropTypes.number.isRequired,
+            amountForSpecialPercent: PropTypes.number.isRequired,
+          }),
+        }),
+        PropTypes.shape({
+          type: PropTypes.string.isRequired,
+          minCost: PropTypes.number.isRequired,
+          maxCost: PropTypes.number.isRequired,
+          step: PropTypes.number.isRequired,
+          minInitialFee: PropTypes.number.isRequired,
+          minTerm: PropTypes.number.isRequired,
+          maxTerm: PropTypes.number.isRequired,
+          minCreditAmount: PropTypes.number.isRequired,
+          percent: PropTypes.shape({
+            default: PropTypes.number.isRequired,
+            specialPercent: PropTypes.number.isRequired,
+            amountForSpecialPercent: PropTypes.number.isRequired,
+            oneAddition: PropTypes.number.isRequired,
+            allAdditions: PropTypes.number.isRequired,
+          }),
+          additionalToCar: PropTypes.shape({
+            casco: PropTypes.string.isRequired,
+            lifeInsurance: PropTypes.string.isRequired,
+          }),
+        }),
+      ]).isRequired,
       cost: PropTypes.number.isRequired,
       initialFee: PropTypes.number.isRequired,
       term: PropTypes.number.isRequired,
@@ -85,6 +125,7 @@ CreditCalculator.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onPopupClose: PropTypes.func.isRequired,
   onChangePhone: PropTypes.func.isRequired,
+  requestNumber: PropTypes.number,
 }
 
 export default withCreditCalculator(CreditCalculator);

@@ -10,7 +10,7 @@ const withCreditCalculator = (Component) => {
         step: 1,
         purpose: `none`,
         isPurposeSelectOpened: false,
-        paramsCredit: ``,
+        paramsCredit: {},
         
         cost: 0,
         initialFee: 0,
@@ -220,6 +220,7 @@ const withCreditCalculator = (Component) => {
 
     onMakeRequest(evt) {
       evt.preventDefault();
+      this.requestNumber = localStorage.getItem(`requestNumber`) !== null ? +localStorage.getItem(`requestNumber`) + 1 : 1;
 
       this.setState({step: 3});
     }
@@ -234,6 +235,7 @@ const withCreditCalculator = (Component) => {
     onSubmit(evt) {
       evt.preventDefault();
 
+      localStorage.setItem(`requestNumber`, this.requestNumber);
       this.setState({step: 4});
       document.documentElement.style.overflow = `hidden`;
       document.addEventListener(`keydown`, this.closePopupKeydown);
@@ -257,10 +259,9 @@ const withCreditCalculator = (Component) => {
 
     onChangePhone(evt) {
       const {name, value} = evt.target;
-      const result = value.replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, '+7 ($1) $2-$3-$4');
 
-      this.setState({name, result});
-      localStorage.setItem(name, result);
+      this.setState({name, value});
+      localStorage.setItem(name, value);
     }
 
     render() {
@@ -285,6 +286,7 @@ const withCreditCalculator = (Component) => {
           onPopupClose={this.onPopupClose}
           onRegApplicationChange={this.onRegApplicationChange}
           onChangePhone={this.onChangePhone}
+          requestNumber={this.requestNumber}
         />
       );
     }

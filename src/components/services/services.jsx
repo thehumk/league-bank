@@ -30,6 +30,7 @@ const Services = ({activeSlide, onTabChange, onSwipeStart}) => {
         <Repeat numTimes={QuantitySlides.SERVICES}>
           {(i) => (
             <TemplateService
+              key={i}
               data={ServicesData[i -1]}
             />
           )}

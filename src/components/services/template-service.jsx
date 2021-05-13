@@ -27,7 +27,7 @@ TemplateService.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    advantages: PropTypes.string.isRequired,
+    advantages: PropTypes.array.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
 }

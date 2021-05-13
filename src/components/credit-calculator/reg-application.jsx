@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {divideNumberToSpace} from '../../utils';
+import {divideNumberToSpace, shakeEffect} from '../../utils';
+import InputMask from 'react-input-mask';
 
-const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit}) => {
+const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit, requestNumber}) => {
   const {purpose, cost, initialFee, term} = state;
   return (
     <form action="#" className="credit-calculator__reg-application reg-application" onSubmit={onSubmit}>
@@ -11,7 +12,7 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit}
         <tbody>
           <tr className="reg-application__param-field">
             <td className="reg-application__field-name">Номер заявки</td>
-            <td className="reg-application__field-value">№ 0010</td>
+            <td className="reg-application__field-value">№ {requestNumber}</td>
           </tr>
           <tr className="reg-application__param-field">
             <td className="reg-application__field-name">Цель кредита</td>
@@ -38,24 +39,37 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit}
           className="reg-application__input reg-application__input--full-name"
           placeholder="ФИО"
           onChange={onRegApplicationChange}
+          onInvalid={(evt) => {
+            console.log(evt.target)
+            shakeEffect(evt.target);
+          }}
           value={localStorage.getItem(`fullname`) !== null ? localStorage.getItem(`fullname`) : ``}
           autoFocus
           required/>
-        <input
+        <InputMask
+          mask="+7 (999) 999-9999"
           type="tel"
           name="tel"
           className="reg-application__input"
           placeholder="Телефон"
-          pattern="\(\d{3}\) \d{3}\-\d{4}"
           onChange={onChangePhone}
+          onInvalid={(evt) => {
+            console.log(evt.target)
+            shakeEffect(evt.target);
+          }}
           value={localStorage.getItem(`tel`) !== null ? localStorage.getItem(`tel`) : ``}
-          required/>
+          required
+        />
         <input
           type="email"
           name="email"
           className="reg-application__input"
           placeholder="E-mail"
           onChange={onRegApplicationChange}
+          onInvalid={(evt) => {
+            console.log(evt.target)
+            shakeEffect(evt.target);
+          }}
           value={localStorage.getItem(`email`) !== null ? localStorage.getItem(`email`) : ``}
           required/>
       </div>
@@ -69,7 +83,46 @@ RegApplication.propTypes = {
     step: PropTypes.number.isRequired,
     purpose: PropTypes.string.isRequired,
     isPurposeSelectOpened: PropTypes.bool.isRequired,
-    paramsCredit: PropTypes.object.isRequired,
+    paramsCredit: PropTypes.oneOfType([
+      PropTypes.shape({}),
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        minCost: PropTypes.number.isRequired,
+        maxCost: PropTypes.number.isRequired,
+        step: PropTypes.number.isRequired,
+        minInitialFee: PropTypes.number.isRequired,
+        minTerm: PropTypes.number.isRequired,
+        maxTerm: PropTypes.number.isRequired,
+        minCreditAmount: PropTypes.number.isRequired,
+        maternalCapitalValue: PropTypes.number.isRequired,
+        percent: PropTypes.shape({
+          default: PropTypes.number.isRequired,
+          specialPercent: PropTypes.number.isRequired,
+          amountForSpecialPercent: PropTypes.number.isRequired,
+        }),
+      }),
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        minCost: PropTypes.number.isRequired,
+        maxCost: PropTypes.number.isRequired,
+        step: PropTypes.number.isRequired,
+        minInitialFee: PropTypes.number.isRequired,
+        minTerm: PropTypes.number.isRequired,
+        maxTerm: PropTypes.number.isRequired,
+        minCreditAmount: PropTypes.number.isRequired,
+        percent: PropTypes.shape({
+          default: PropTypes.number.isRequired,
+          specialPercent: PropTypes.number.isRequired,
+          amountForSpecialPercent: PropTypes.number.isRequired,
+          oneAddition: PropTypes.number.isRequired,
+          allAdditions: PropTypes.number.isRequired,
+        }),
+        additionalToCar: PropTypes.shape({
+          casco: PropTypes.string.isRequired,
+          lifeInsurance: PropTypes.string.isRequired,
+        }),
+      }),
+    ]).isRequired,
     cost: PropTypes.number.isRequired,
     initialFee: PropTypes.number.isRequired,
     term: PropTypes.number.isRequired,
@@ -84,6 +137,7 @@ RegApplication.propTypes = {
   onRegApplicationChange: PropTypes.func.isRequired,
   onChangePhone: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  requestNumber: PropTypes.number.isRequired,
 }
 
 export default RegApplication;

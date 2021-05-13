@@ -33,7 +33,7 @@ const Offer = ({state}) => {
       )}
       {creditAmount < paramsCredit.minCreditAmount && (
         <div className="credit-calculator__offer credit-calculator__offer--refusal">
-          <h3 className="credit-calculator__offer-title credit-calculator__offer-title--refusal">Наш банк не выдаёт ипотечные кредиты меньше 500 000 рублей.</h3>
+          <h3 className="credit-calculator__offer-title credit-calculator__offer-title--refusal">Наш банк не выдаёт ипотечные кредиты меньше {divideNumberToSpace(paramsCredit.minCreditAmount)} рублей.</h3>
           <p className="credit-calculator__offer-name credit-calculator__offer-name--refusal">Попробуйте использовать другие параметры для расчёта.</p>
         </div>
       )}
@@ -46,7 +46,46 @@ Offer.propTypes = {
     step: PropTypes.number.isRequired,
     purpose: PropTypes.string.isRequired,
     isPurposeSelectOpened: PropTypes.bool.isRequired,
-    paramsCredit: PropTypes.object.isRequired,
+    paramsCredit: PropTypes.oneOfType([
+      PropTypes.shape({}),
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        minCost: PropTypes.number.isRequired,
+        maxCost: PropTypes.number.isRequired,
+        step: PropTypes.number.isRequired,
+        minInitialFee: PropTypes.number.isRequired,
+        minTerm: PropTypes.number.isRequired,
+        maxTerm: PropTypes.number.isRequired,
+        minCreditAmount: PropTypes.number.isRequired,
+        maternalCapitalValue: PropTypes.number.isRequired,
+        percent: PropTypes.shape({
+          default: PropTypes.number.isRequired,
+          specialPercent: PropTypes.number.isRequired,
+          amountForSpecialPercent: PropTypes.number.isRequired,
+        }),
+      }),
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        minCost: PropTypes.number.isRequired,
+        maxCost: PropTypes.number.isRequired,
+        step: PropTypes.number.isRequired,
+        minInitialFee: PropTypes.number.isRequired,
+        minTerm: PropTypes.number.isRequired,
+        maxTerm: PropTypes.number.isRequired,
+        minCreditAmount: PropTypes.number.isRequired,
+        percent: PropTypes.shape({
+          default: PropTypes.number.isRequired,
+          specialPercent: PropTypes.number.isRequired,
+          amountForSpecialPercent: PropTypes.number.isRequired,
+          oneAddition: PropTypes.number.isRequired,
+          allAdditions: PropTypes.number.isRequired,
+        }),
+        additionalToCar: PropTypes.shape({
+          casco: PropTypes.string.isRequired,
+          lifeInsurance: PropTypes.string.isRequired,
+        }),
+      }),
+    ]).isRequired,
     cost: PropTypes.number.isRequired,
     initialFee: PropTypes.number.isRequired,
     term: PropTypes.number.isRequired,

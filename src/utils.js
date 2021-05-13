@@ -27,3 +27,10 @@ export const divideNumberToSpace = (num) => {
 
   return result;
 }
+
+export const shakeEffect = (element) => {
+  element.style.animation = `shake ${600 / 1000}s`;
+  setTimeout(() => {
+    element.style.animation = ``;
+  }, 600);
+}
