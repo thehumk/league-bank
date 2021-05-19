@@ -4,7 +4,7 @@ import logo from '../img/logo.svg';
 import SignIn from './sign-in';
 import withHeader from '../hocs/with-header';
 
-const Header = ({state, onMenuOpening, onMenuClosure, onSignInOpening, onSignInClosure, onSignInFieldChange}) => {
+const Header = ({state, onMenuOpening, onMenuClosure, onSignInOpening, onSignInClosure, onSignInFieldChange, onPasswordShow, onPasswordHide}) => {
   const menuOpened = state.menuOpened;
 
   return (
@@ -39,6 +39,8 @@ const Header = ({state, onMenuOpening, onMenuClosure, onSignInOpening, onSignInC
             state={state}
             onSignInClosure={onSignInClosure}
             onSignInFieldChange={onSignInFieldChange}
+            onPasswordShow={onPasswordShow}
+            onPasswordHide={onPasswordHide}
           />
         </div>
       </div>
@@ -60,6 +62,8 @@ Header.propTypes = {
   onSignInOpening: PropTypes.func.isRequired,
   onSignInClosure: PropTypes.func.isRequired,
   onSignInFieldChange: PropTypes.func.isRequired,
+  onPasswordShow: PropTypes.func.isRequired,
+  onPasswordHide: PropTypes.func.isRequired,
 }
 
 export default withHeader(Header);

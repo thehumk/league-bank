@@ -12,7 +12,7 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit,
         <tbody>
           <tr className="reg-application__param-field">
             <td className="reg-application__field-name">Номер заявки</td>
-            <td className="reg-application__field-value">№ {requestNumber}</td>
+            <td className="reg-application__field-value">№ {(`0000` + requestNumber).slice(-4)}</td>
           </tr>
           <tr className="reg-application__param-field">
             <td className="reg-application__field-name">Цель кредита</td>
@@ -47,9 +47,11 @@ const RegApplication = ({state, onRegApplicationChange, onChangePhone, onSubmit,
           required/>
         <InputMask
           mask="+7 (999) 999-9999"
+          maskChar=""
           type="tel"
           name="tel"
-          className="reg-application__input"
+          minLength={17}
+          className="reg-application__input reg-application__input--phone"
           placeholder="Телефон"
           onChange={onChangePhone}
           onInvalid={(evt) => {
@@ -127,7 +129,7 @@ RegApplication.propTypes = {
     casco: PropTypes.bool.isRequired,
     lifeInsurance: PropTypes.bool.isRequired,
     creditAmount: PropTypes.number.isRequired,
-    percent: PropTypes.number.isRequired,
+    percent: PropTypes.string.isRequired,
     monthlyPayment: PropTypes.number.isRequired,
     requiredIncome: PropTypes.number.isRequired,
   }).isRequired,

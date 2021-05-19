@@ -1,18 +1,28 @@
 .credit-calculator {
   max-width: 1170px;
-  margin: 0 auto 85px auto;
-  padding: 0 20px;
+  margin: 0 auto 84px auto;
+  padding: 0 20px 1px 20px;
 
   @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
-    margin-bottom: 40px;
-    padding: 0 45px;
+    margin-bottom: 27px;
+    padding: 0 45px 1px 45px;
   }
 
   @media (max-width: $tablet-width - 1) {
-    margin-bottom: 44px;
-    padding: 0 15px;
+    margin-bottom: 43px;
+    padding: 0 15px 1px 15px;
   }
 }
+
+// .credit-calculator__form {
+//   @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+//     margin-bottom: 57px;
+//   }
+
+//   @media (max-width: $tablet-width - 1) {
+//     margin-bottom: 9px;
+//   }
+// }
 
 .credit-calculator__title {
   margin-bottom: 27px;
@@ -148,6 +158,7 @@
   display: none;
   position: absolute;
   width: 100%;
+  height: auto;
   top: 58px;
   left: -1px;
   margin: 0;
@@ -161,13 +172,18 @@
 
 .credit-calculator__option {
   padding-left: 23px;
+  padding-top: 2px;
   font-size: 16px;
-  line-height: 59px;
+  line-height: 57px;
   font-weight: 400;
   border-bottom: 1px solid #C1C2CA;
 
   &:last-child {
     border: none;
+  }
+
+  @media (max-width: $tablet-width - 1) {
+    padding-left: 14px;
   }
 }
 
@@ -175,6 +191,10 @@
   margin: 0;
   padding: 0;
   border: 0;
+
+  @media (max-width: $tablet-width - 1) {
+    margin-bottom: 9px;
+  }
 }
 
 .credit-calculator__label {
@@ -200,7 +220,7 @@
     margin-bottom: 9px;
     
     &--term {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
   }
 }
@@ -231,9 +251,14 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+
+  @media (max-width: $tablet-width - 1) {
+    right: 7px;
+  } 
 }
 
 .credit-calculator__field-title {
+  display: block;
   margin: 0;
   margin-bottom: 9px;
   font-size: 16px;
@@ -268,6 +293,14 @@
 
   &--show {
     display: block;
+  }
+
+  &--initial-fee {
+    margin-bottom: 21px;
+  }
+
+  &--term {
+    margin-bottom: 16px;
   }
 
   @media (max-width: $desktop-width - 1) {
@@ -331,6 +364,7 @@
   position: relative;
   padding-left: 24px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   @media (max-width: $tablet-width - 1) {
     font-size: 14px;
@@ -374,10 +408,12 @@
     height: 225px;
   }
 
-  @media (max-width: $desktop-width - 1) {
+  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
     width: 100%;
-    padding: 35px 15px 40px 15px;
-    margin-top: 31px;
+    height: auto;
+    padding: 53px 60px 60px 60px;
+    margin-top: 19px;
+    margin-bottom: 30px;
 
     &--refusal {
       padding: 53px 60px 60px 60px;
@@ -386,6 +422,9 @@
 
   @media (max-width: $tablet-width - 1) {
     height: auto;
+    margin-top: 13px;
+    margin-bottom: 9px;
+    padding: 34px 15px 40px 15px;
     font-size: 18px;
     line-height: 25px;
 
@@ -444,7 +483,7 @@
 .credit-calculator__offer-item {
   @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
     &:first-child {
-      margin-right: 52px;
+      margin-right: 50px;
     }
   }
 
@@ -509,17 +548,5 @@
 
   @media (max-width: $tablet-width - 1) {
     font-size: 14px;
-  }
-}
-
-.credit-calculator__reg-application {
-  margin-top: 68px;
-
-  @media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
-    margin-top: 55px;
-  }
-
-  @media (max-width: $tablet-width - 1) {
-    margin-top: 43px;
   }
 }

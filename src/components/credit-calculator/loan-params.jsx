@@ -41,7 +41,7 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
 
         <input
           type="number"
-          className="credit-calculator__input"
+          className="credit-calculator__input credit-calculator__input--initial-fee"
           name="initialFee"
           min={paramsCredit.minCost * paramsCredit.minInitialFee / 100}
           max={paramsCredit.maxCost}
@@ -49,7 +49,7 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
           onBlur={onInitialFeeChange}
           onChange={onInputChange}
         />
-        <div className="credit-calculator__input credit-calculator__input--show" tabIndex="0" onFocus={onInputFocus}>{divideNumberToSpace(initialFee)} рублей</div>
+        <div className="credit-calculator__input credit-calculator__input--show credit-calculator__input--initial-fee" tabIndex="0" onFocus={onInputFocus}>{divideNumberToSpace(initialFee)} рублей</div>
 
         <input
           type="range"
@@ -67,7 +67,7 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
             marginLeft: getRangeValuePosition() + `%`,
             transform: `translateX(-${getRangeValuePosition() / 2}%)`
           }}
-        >{Math.floor(initialFee * 100 / cost)} %</span>
+        >{isNaN(Math.floor(initialFee * 100 / cost)) ? 0 : Math.floor(initialFee * 100 / cost)}%</span>
       </label>
 
       <label className="credit-calculator__label credit-calculator__label--term">
@@ -75,7 +75,7 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
 
         <input
           type="number"
-          className="credit-calculator__input"
+          className="credit-calculator__input credit-calculator__input--term"
           name="term"
           min={paramsCredit.minTerm}
           max={paramsCredit.maxTerm}
@@ -83,7 +83,7 @@ const LoanParams = ({state, onInputFocus, onInputChange, onCostChange, onInitial
           onBlur={onTermChange}
           onChange={onInputChange}
         />
-        <div className="credit-calculator__input credit-calculator__input--show" tabIndex="0" onFocus={onInputFocus}>{term} лет</div>
+        <div className="credit-calculator__input credit-calculator__input--show credit-calculator__input--term" tabIndex="0" onFocus={onInputFocus}>{term} лет</div>
 
         <input
           type="range"
@@ -171,14 +171,23 @@ LoanParams.propTypes = {
         }),
       }),
     ]).isRequired,
-    cost: PropTypes.number.isRequired,
-    initialFee: PropTypes.number.isRequired,
-    term: PropTypes.number.isRequired,
+    cost: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
+    initialFee: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
+    term: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
     maternalCapital: PropTypes.bool.isRequired,
     casco: PropTypes.bool.isRequired,
     lifeInsurance: PropTypes.bool.isRequired,
     creditAmount: PropTypes.number.isRequired,
-    percent: PropTypes.number.isRequired,
+    percent: PropTypes.string.isRequired,
     monthlyPayment: PropTypes.number.isRequired,
     requiredIncome: PropTypes.number.isRequired,
   }).isRequired,

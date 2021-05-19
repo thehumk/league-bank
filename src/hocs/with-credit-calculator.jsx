@@ -1,5 +1,6 @@
 import React from 'react';
 import {MortgageParams, CarParams, KeyCode, REQUIRED_INCOME, QUANTITY_MONTH} from '../const';
+import {shakeEffect} from '../utils';
 
 const withCreditCalculator = (Component) => {
   class WithCreditCalculator extends React.PureComponent {
@@ -21,7 +22,7 @@ const withCreditCalculator = (Component) => {
         lifeInsurance: false,
 
         creditAmount: 0,
-        percent: 0,
+        percent: `0`,
         monthlyPayment: 0,
         requiredIncome: 0,
       }
@@ -64,13 +65,23 @@ const withCreditCalculator = (Component) => {
     }
 
     onSelectOpen(evt) {
-      this.options = evt.currentTarget.querySelector(`.credit-calculator__select-list`);
+      this.purposeSelect = evt.currentTarget;
+      this.options = this.purposeSelect.querySelector(`.credit-calculator__select-list`);
+      this.selectIcon = this.purposeSelect.querySelector(`.credit-calculator__select-icon`);
+
+
       this.options.style.display = `block`;
+      this.purposeSelect.style.marginBottom = this.options.offsetHeight + `px`;
+      this.selectIcon.style.transform = `rotate(180deg) translateY(50%)`;
+
       this.setState({isPurposeSelectOpened: true});
     }
 
     onSelectClose() {
+      this.purposeSelect.style.marginBottom = 0;
       this.options.style.display = `none`;
+      this.selectIcon.style.transform = `rotate(0) translateY(-50%)`;
+
       this.setState({isPurposeSelectOpened: false});
     }
 
@@ -160,7 +171,8 @@ const withCreditCalculator = (Component) => {
     }
 
     onCostChangeSign(evt) {
-      let cost = this.state.cost;
+      let cost = this.state.cost === `Некорректное значение` ? this.state.paramsCredit.minCost : this.state.cost;
+      evt.target.offsetParent.querySelector(`.credit-calculator__input--show`).style.color = `#1F1E25`;
 
       evt.target.id === `plus` ? cost += this.state.paramsCredit.step : cost -= this.state.paramsCredit.step;
       if (cost < this.state.paramsCredit.minCost) {
@@ -172,7 +184,7 @@ const withCreditCalculator = (Component) => {
 
       this.setState({
         cost: cost,
-        initialFee: cost * (this.state.initialFee * 100 / this.state.cost) / 100,
+        initialFee: this.state.cost === `Некорректное значение` ? cost * this.state.paramsCredit.minInitialFee / 100 : cost * this.state.initialFee / this.state.cost,
       });
     }
 
@@ -183,11 +195,11 @@ const withCreditCalculator = (Component) => {
     getInterestRate() {
       if (this.state.purpose === `mortgage`) {
         this.state.initialFee >= this.state.cost * this.state.paramsCredit.percent.amountForSpecialPercent / 100 ?
-          this.setState({percent: this.state.paramsCredit.percent.specialPercent})
-          :
-          this.setState({percent: this.state.paramsCredit.percent.default});
+        this.setState({percent: this.state.paramsCredit.percent.specialPercent.toFixed(2)})
+        :
+        this.setState({percent: this.state.paramsCredit.percent.default.toFixed(2)});
       }
-
+      
       if (this.state.purpose === `car`) {
         let percent = this.state.paramsCredit.percent.default;
 
@@ -202,8 +214,8 @@ const withCreditCalculator = (Component) => {
         if (this.state.casco && this.state.lifeInsurance) {
           percent = this.state.paramsCredit.percent.allAdditions;
         }
-
-        this.setState({percent: percent});
+        
+        this.setState({percent: percent.toFixed(2)});
       }
     }
 
@@ -235,6 +247,11 @@ const withCreditCalculator = (Component) => {
     onSubmit(evt) {
       evt.preventDefault();
 
+      if(evt.currentTarget.querySelector(`.reg-application__input--phone`).value.length < 17) {
+        shakeEffect(evt.currentTarget.querySelector(`.reg-application__input--phone`));
+        return;
+      }
+      
       localStorage.setItem(`requestNumber`, this.requestNumber);
       this.setState({step: 4});
       document.documentElement.style.overflow = `hidden`;
